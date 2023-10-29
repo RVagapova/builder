@@ -8,18 +8,15 @@ public class Person {
     protected int age;
     protected String address;
 
-    public Person(String name, String surname) {
-        this.name = name;
-        this.surname = surname;
-    }
-
-    public Person(String name, String surname, int age) {
+    public Person(String name, String surname, int age, String address) {
         this.name = name;
         this.surname = surname;
         this.age = age;
+        this.address = address;
     }
+
     public boolean hasAge() {
-         return getAge().isPresent();
+        return getAge().isPresent();
     }
 
     public boolean hasAddress() {
@@ -39,8 +36,7 @@ public class Person {
     }
 
     public OptionalInt getAge() {
-        OptionalInt optAge = OptionalInt.of(age);
-        return optAge;
+        return OptionalInt.of(age);
     }
 
     public String getAddress() {
@@ -55,6 +51,10 @@ public class Person {
         if (hasAge()) {
             age++;
         }
+    }
+
+    public PersonBuilder newChildBuilder() {
+        return new PersonBuilder().setSurname(getSurname()).setAddress(getAddress());
     }
 
     @Override
@@ -72,13 +72,5 @@ public class Person {
         int result = name != null ? name.hashCode() : 0;
         result = 31 * result + (surname != null ? surname.hashCode() : 0);
         return result;
-    }
-
-    public PersonBuilder newChildBuilder() {
-        PersonBuilder child = new PersonBuilder();
-        child.setName(getName());
-        child.setAge(0);
-        child.setAddress(getAddress());
-        return child;
     }
 }
