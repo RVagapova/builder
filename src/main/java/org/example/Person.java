@@ -2,6 +2,8 @@ package org.example;
 
 import java.util.OptionalInt;
 
+import static java.util.OptionalInt.empty;
+
 public class Person {
     protected final String name;
     protected final String surname;
@@ -36,7 +38,11 @@ public class Person {
     }
 
     public OptionalInt getAge() {
-        return OptionalInt.of(age);
+        if (hasAge()) {
+            return OptionalInt.of(age);
+        } else {
+            return empty();
+        }
     }
 
     public String getAddress() {
