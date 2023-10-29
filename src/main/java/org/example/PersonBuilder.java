@@ -33,7 +33,7 @@ public class PersonBuilder {
 
     public Person build() {
         if (name == null || surname == null) {
-            throw new IllegalArgumentException("Необходимо задать имя и фамилию");
+            throw new IllegalStateException("Необходимо задать имя и фамилию");
         } else {
             return new Person(name, surname, age, address);
         }
